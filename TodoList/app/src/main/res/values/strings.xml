@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Todo List</string>
+    <string name="navigation_all">All</string>
+    <string name="navigation_pending">Pending</string>
+    <string name="navigation_completed">Completed</string>
+    <string name="navigation_recent">Recent</string>
+</resources>
