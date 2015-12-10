@@ -4,4 +4,6 @@
     <string name="navigation_pending">Pending</string>
     <string name="navigation_completed">Completed</string>
     <string name="navigation_recent">Recent</string>
+
+    <string name="empty_string">No data to show</string>
 </resources>

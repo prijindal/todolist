@@ -1,5 +1,6 @@
 package com.prijindal.todolist;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -51,26 +52,28 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(findViewById(R.id.drawer_layout), "I'm A Snack bar", Snackbar.LENGTH_LONG).setAction("Action", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "Snack bar Action", Toast.LENGTH_LONG).show();
-                    }
-                }).show();
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
             }
         });
 
+        TodoSQLiteHelper database = new TodoSQLiteHelper(this);
+        ArrayList<TodoItem> items = database.getData();
 
-        ArrayList<TodoItem> items = new ArrayList<TodoItem>();
-        items.add( new TodoItem("Create Github Repo", true) );
-        items.add( new TodoItem("Manage Github Repo") );
-
-        TodoItemsAdapter adapter = new TodoItemsAdapter(this, items);
-
-        // Create a ListView object
+        TextView emptyText = (TextView) findViewById(R.id.empty_text);
         ListView listView = (ListView) findViewById(R.id.listview);
-        // set the adapter to the view
-        listView.setAdapter(adapter);
+
+        if (items.isEmpty()) {
+            listView.setVisibility(View.INVISIBLE);
+            emptyText.setVisibility(View.VISIBLE);
+        }
+        else {
+            TodoItemsAdapter adapter = new TodoItemsAdapter(this, items);
+            listView.setAdapter(adapter);
+
+            listView.setVisibility(View.VISIBLE);
+            emptyText.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

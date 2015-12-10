@@ -1,6 +1,7 @@
 package com.prijindal.todolist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class TodoItemsAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view;
         if(convertView == null) {
@@ -39,6 +40,8 @@ public class TodoItemsAdapter extends ArrayAdapter {
         }
 
         final AppCompatCheckBox todoCheckBox = (AppCompatCheckBox) view.findViewById(R.id.todo_checkbox);
+
+        final TodoSQLiteHelper database = new TodoSQLiteHelper(mContext);
         TextView todoText = (TextView) view.findViewById(R.id.todo_text);
 
         todoCheckBox.setOnClickListener(new AppCompatCheckBox.OnClickListener() {
@@ -46,7 +49,16 @@ public class TodoItemsAdapter extends ArrayAdapter {
             public void onClick(View view) {
                 // current is the new Value
                 Boolean current = todoCheckBox.isChecked();
-                Toast.makeText(mContext, "Hello, For setting to " + current, Toast.LENGTH_SHORT).show();
+                database.setStatus(mList.get(position).getId(), current);
+            }
+        });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ItemActivity.class);
+                intent.putExtra("id", mList.get(position).getId());
+                mContext.startActivity(intent);
             }
         });
 
