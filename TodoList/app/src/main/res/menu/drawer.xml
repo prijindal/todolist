@@ -13,9 +13,5 @@
         <item
             android:id="@+id/navigation_completed"
             android:title="@string/navigation_completed" />
-
-        <item
-            android:id="@+id/navigation_recent"
-            android:title="@string/navigation_recent" />
     </group>
 </menu>

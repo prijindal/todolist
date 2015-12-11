@@ -48,6 +48,13 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void saveTask(int id, String newTask) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String UPDATE_QUERY = "UPDATE " + TABLE_NAME + " SET task='" + newTask +"' WHERE id=" + id;
+        db.execSQL(UPDATE_QUERY);
+        db.close();
+    }
+
     public void deleteItem(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String DELETE_QUERY = "DELETE FROM " + TABLE_NAME + " WHERE id=" + id;

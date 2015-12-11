@@ -33,6 +33,12 @@
             android:text="@string/empty_string"
             android:layout_centerInParent="true"/>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_height="wrap_content"
